@@ -48,40 +48,52 @@ namespace ToDoServices.API.Controllers
         }
 
         [HttpPost]
-        public object Post([FromBody] TodoTaskDTO taskDTO)
+        public ActionResult Create(TodoTaskDTO model)
         {
             try
             {
-                TodoTask task = _mapper.Map<TodoTask>(taskDTO);
+                TodoTask task = new TodoTask
+                {
+                    Title = model.Title,
+                    Description = model.Description,
+                    IsCompleted = model.IsCompleted
+                };
+
                 _db.TodoTasks.Add(task);
                 _db.SaveChanges();
-                return Ok(task);
+
+                return Ok();
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
-
-
-
         }
 
-        [HttpPut]
-        public object Put(int id, [FromBody] TodoTaskDTO taskDTO)
+        [HttpPut("{id}")]
+        public object Update(int id, TodoTaskDTO model)
         {
             try
             {
-                TodoTask task = _mapper.Map<TodoTask>(taskDTO);
-                task.Id = id;
-                _db.TodoTasks.Update(task);
+                TodoTask task = _db.TodoTasks.Find(id);
+                task.Title = model.Title;
+                task.Description = model.Description;
+                task.IsCompleted = model.IsCompleted;
+
                 _db.SaveChanges();
-                return Ok(task);
+                return Ok();
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+
+
+
+
+
 
         [HttpDelete("{id}")]
         public object Delete(int id)

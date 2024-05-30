@@ -19,21 +19,21 @@ namespace ToDoServices.API.Data
                                new TodoTask
                                {
                                    Id = 1,
-                                   Tile = "Task 1",
+                                   Title = "Task 1",
                                    Description = "Description 1",
                                    IsCompleted = false
                                },
                                               new TodoTask
                                               {
                                                   Id = 2,
-                                                  Tile = "Task 2",
+                                                  Title = "Task 2",
                                                   Description = "Description 2",
                                                   IsCompleted = false
                                               },
                                                              new TodoTask
                                                              {
                                                                  Id = 3,
-                                                                 Tile = "Task 3",
+                                                                 Title = "Task 3",
                                                                  Description = "Description 3",
                                                                  IsCompleted = false
                                                              }
