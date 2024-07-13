@@ -11,8 +11,8 @@ using ToDoServices.API.Data;
 namespace ToDoServices.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240529184306_setdb3")]
-    partial class setdb3
+    [Migration("20240713072242_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,13 +39,36 @@ namespace ToDoServices.API.Migrations
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Tile")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("TodoTasks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Description 1",
+                            IsCompleted = false,
+                            Title = "Task 1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Description 2",
+                            IsCompleted = false,
+                            Title = "Task 2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Description 3",
+                            IsCompleted = false,
+                            Title = "Task 3"
+                        });
                 });
 #pragma warning restore 612, 618
         }
